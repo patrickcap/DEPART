@@ -12,7 +12,7 @@ predictions = []
 prediction_router = APIRouter(prefix='/predictions')
 
 # Request, predict, and return the delay probability of a particular future flight.
-@prediction_router.post("/predictions", status_code=200)
+@prediction_router.post("", status_code=200)
 async def create_prediction(prediction_params: PredictionParams):
     # Pass prediction_params to the model with id model_id
 
