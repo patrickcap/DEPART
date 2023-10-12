@@ -91,11 +91,14 @@ after returning a status from the `POST` request.
 If the specified `model_id` corresponds to a known model then return an empty response with a 204 status.
 
 
-###### PUT /deploy/{model_id}
+###### PUT /deploy?model-id={model_id}
 
 For simplicity, you should store a reference to the "deployed" model as a global constant through the API state. When
 `{model_id}` is a valid model, this endpoint should return an empty 204 response after updating the constant to refer to the
 specified model to indicate that it has been deployed.
+
+To deploy a model the caller must provide a valid API key in the headers using the key `X-api-key`. You may hard code a validate api key
+and the API should return a `401` or `403` when the specified key is either unrecognized or does not have permission to deploy models.
 
 
 ###### POST /predictions
