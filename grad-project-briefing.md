@@ -125,20 +125,11 @@ You may use any languages, libraries, and frameworks that you wish, although it 
 The project must be hosted on public GitHub (https://github.com) and all team members should be admins of the repository. 
 It is up to you whether you choose to make the repository public or private. It must not be published as part of a GitHub organisation.
 
-**IMPORTANT:** You must not copy any data, code, or other media from an Airbus laptop, and/or other Airbus managed device 
-into a public GitHub repository at any point during this project.
-
 
 ### Project organisation
 
 You are free to self-organise the team however you want. You do not need to follow any specific "agile" framework or other
 project organisation manifesto unless you deem it fit.
-
-
-### Who can we contact if we have questions?
-
-I will try to be available as much as possible throughout the project but while I am on vacation you may contact Nicolas Guzman (nicolas.guzman@airbus.com).
-Sergei Bobrovskyi (sergei.bobrovskyi@airbus.com) has also kindly offered to support with any general questions you may have.
 
 
 ### What is the deadline?
@@ -165,10 +156,9 @@ part of the Actions documentation provides an in depth overview of GitHub Action
 - [Made with ML](https://madewithml.com/#foundations) is another great tool for learning about various AI and ML Engineering/ML Software Engineering topics 🎃
 - If you're somehow not bored of uni style lectures and want to attend some more then [MIT's Introduction to Machine Learning](https://openlearninglibrary.mit.edu/courses/course-v1:MITx+6.036+1T2019/course/) is great (or so I'm told)... 🥱
 - For those new to machine learning, you may want to check out [Microsoft's' AI For Beginners course](https://microsoft.github.io/AI-For-Beginners/) 🎊
-- The slides presented during the introduction to REST APIs are [here](https://docs.google.com/presentation/d/1sHFFUFe402n1tTypRAw3BnaHHKQHdA4isS0Cvncb3-Q/edit#slide=id.p)
-(you may need to request access 😅) **IMPORTANT**: Do not request access from an Airbus email address 🙀
+- The slides presented during the introduction to REST APIs are [here](https://docs.google.com/presentation/d/1sHFFUFe402n1tTypRAw3BnaHHKQHdA4isS0Cvncb3-Q/edit#slide=id.p) - you may need to request access 😱
 - The REST API workshop which includes a complete example OpenAPI doc can be found [here](https://github.com/james-zafar/restapi-workshop) and the solution is [here](https://github.com/james-zafar/restapi-workshop-solution) 🧐
-- Finally, for those busy planning their next vacation, consider checking out [New York Times' 52 places to travel in 2023](https://www.nytimes.com/interactive/2023/travel/52-places-travel-2023.html) 🇨🇦🇦🇺🇲🇽🇨🇱🇪🇸🇨🇳🇬🇧
+- Finally, for those busy planning their next vacation, consider checking out [New York Times' 52 places to travel in 2023](https://www.nytimes.com/interactive/2023/travel/52-places-travel-2023.html) 🇨🇦🇲🇽🇦🇺🇨🇱🇪🇸🇨🇳🇬🇧
 - And for those of you that insist on traveling the Ryanair's of the world, here's some information about your [consumer rights](https://www.nytimes.com/2023/07/26/travel/flight-cancellation-delays-tips.html) that you'll inevitably need... 🫣 
 
 #### I've never used Git or GitHub, will this be a problem?
