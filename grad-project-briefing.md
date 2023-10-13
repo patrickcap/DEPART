@@ -93,11 +93,11 @@ after returning a status from the `POST` request.
 
 The query parameter `export` should be optional and `false` by default.
 
-The query parameter `file-name` is not required, but if provided should overwrite the default model name.
+The query parameter `file-name` is not required, but if provided should replace the default model name.
 
 If `export` is set to true and `file-name` is provided, then the model with the corresponding `model_id` should be saved to
-the location specified by the `file-name` parameter. For simplicity, you may assume that the `file-name` is a location on the local file
-system that the API is writable. If `file-name` is not provided but `export` is set to `true` then the model should be saved to
+the location specified in the `file-name` parameter. For simplicity, you may assume that the `file-name` is a location on the local file
+system that is writable. If `file-name` is not provided but `export` is set to `true` then the model should be saved to
 the current working directory using the `model_id` as the filename.
 
 If the model was successfully exported, the response should contain an additional key in the response indicating the model has been exported. For example:
