@@ -185,19 +185,17 @@ During the review we may discuss the following topics:
 - If you'd like to learn more about the theory behind type annotations in Python, I'd recommend checking out [PEP483](https://peps.python.org/pep-0483/) 💪
 - To learn more about typing annotations in Python check out [PEP484](https://peps.python.org/pep-0484/) and the [MyPy getting started page](https://mypy.readthedocs.io/en/stable/getting_started.html) 😍
 - For those new to sklearn, considering checking out the sklearn [tutorials](https://scikit-learn.org/stable/tutorial/index.html) 🍁
-- The [Understanding GitHub Actions Workflow File](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#understanding-the-workflow-file).
-part of the Actions documentation provides an in depth overview of GitHub Actions Workflow files 🤨
-- If you're interested in learning more about best practises in ML, check out [Google's "Rules of Machine Learning"](https://developers.google.com/machine-learning/guides/rules-of-ml) 🧐
+- The [Understanding GitHub Actions Workflow File](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#understanding-the-workflow-file) 
+part of the Actions documentation provides an in depth overview of GitHub Actions Workflow files 🧐
+- If you're interested in learning more about best practises in ML, check out [Google's "Rules of Machine Learning"](https://developers.google.com/machine-learning/guides/rules-of-ml) 🥳
 - For this project you may wish to use one of the official GitHub Actions templates as a base, such as this [Python App template](https://github.com/actions/starter-workflows/blob/main/ci/python-app.yml) 👀
 - A great general purpose resource for learning more about specific AI topics is [ai.google](https://ai.google/build/machine-learning/) 🤩
 - [Made with ML](https://madewithml.com/#foundations) is another great tool for learning about various AI and ML Engineering/ML Software Engineering topics 🎃
 - If you're somehow not bored of uni style lectures and want to attend some more then [MIT's Introduction to Machine Learning](https://openlearninglibrary.mit.edu/courses/course-v1:MITx+6.036+1T2019/course/) is great (or so I'm told)... 🥱
 - For those new to machine learning, you may want to check out [Microsoft's AI For Beginners course](https://microsoft.github.io/AI-For-Beginners/) 🎊
-- The slides presented during the introduction to REST APIs are [here](https://docs.google.com/presentation/d/1sHFFUFe402n1tTypRAw3BnaHHKQHdA4isS0Cvncb3-Q/edit#slide=id.p)
-(you may need to request access 😅)
-- The REST API workshop which includes a complete example OpenAPI doc can be found [here](https://github.com/james-zafar/restapi-workshop) and the solution is [here](https://github.com/james-zafar/restapi-workshop-solution) 🧐
-- Finally, for those busy planning their next vacation, consider checking out [New York Times' 52 places to travel in 2023](https://www.nytimes.com/interactive/2023/travel/52-places-travel-2023.html) 🇨🇦🇦🇺🇲🇽🇨🇱🇪🇸🇨🇳🇬🇧
-- And for those of you that insist on traveling the Ryanair's of the world, here's some information about your [consumer rights](https://www.nytimes.com/2023/07/26/travel/flight-cancellation-delays-tips.html) that you'll inevitably need... 🫣 
+- The slides presented during the introduction to REST APIs are [here](https://docs.google.com/presentation/d/1sHFFUFe402n1tTypRAw3BnaHHKQHdA4isS0Cvncb3-Q/edit#slide=id.p) 🎄
+- The REST API workshop which includes a complete example OpenAPI doc can be found [here](https://github.com/james-zafar/restapi-workshop) and the solution is [here](https://github.com/james-zafar/restapi-workshop-solution) 🎉
+- Finally, for those busy planning their next vacation, consider checking out [New York Times' 52 places to travel in 2023](https://www.nytimes.com/interactive/2023/travel/52-places-travel-2023.html) 🇨🇦 🇲🇽 🇦🇺 🇬🇧 🇨🇱 🇨🇳 🇪🇸
 
 #### I've never used Git or GitHub, will this be a problem?
 
