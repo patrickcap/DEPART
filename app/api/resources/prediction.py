@@ -1,8 +1,8 @@
-from fastapi import FastAPI
 from pydantic import BaseModel
 
+predictions = []
+
 class PredictionParams(BaseModel):
-    ML_model_id: int
     flight_num: str
     year_num: int
     month_num: int

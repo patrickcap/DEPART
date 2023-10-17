@@ -1,20 +1,20 @@
 import asyncio
-import random
+import joblib
+import random # TESTING
 import uuid
 
-from dataclasses import dataclass
 from fastapi import APIRouter
 from api.resources.prediction import PredictionParams
-from typing import Any
 
-predictions = []
+from api.resources.prediction import predictions
 
-prediction_router = APIRouter(prefix='/predictions')
+prediction_router = APIRouter(prefix='/predict')
 
 # Request, predict, and return the delay probability of a particular future flight.
 @prediction_router.post("", status_code=200)
-async def create_prediction(prediction_params: PredictionParams):
-    # Pass prediction_params to the model with id model_id
+async def create_prediction(new_prediction: PredictionParams):
+
+    # Pass new_prediction to the model with id model_id
 
     ##############################################
     # Simulating the model fetching the prediction
@@ -22,11 +22,12 @@ async def create_prediction(prediction_params: PredictionParams):
     delay_prediction: float = random.random()
     ##############################################
 
+    lr = joblib.load('randomfs.pkl')
+
     prediction_id: str = str(uuid.uuid4())
-    prediction = {"ML_model_id": prediction_params.ML_model_id,
-                    "flight_num": prediction_params.flight_num,
-                    "delay_probability": delay_prediction,
-                    "id": prediction_id}
+    prediction = {"flight_num": new_prediction.flight_num,
+                  "delay_probability": delay_prediction,
+                  "id": prediction_id}
 
     predictions.append(prediction)
     return {"prediction": prediction}
