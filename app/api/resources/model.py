@@ -17,4 +17,5 @@ class Model:
     """Class for the complete parameters used to define a created model."""
     id: uuid.UUID
     status: str
+    # model: None | (something else, sklearn object, ...)
     params: ModelParams
