@@ -1,7 +1,11 @@
+"""
+Aggregates all API routers and starts the API.
+"""
+
 import os
 import uvicorn
 
-from fastapi import FastAPI, APIRouter, status, Security, HTTPException
+from fastapi import FastAPI, APIRouter
 from typing import Final
 
 from api.operations.create_prediction import prediction_router

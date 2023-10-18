@@ -1,3 +1,7 @@
+"""
+Provides the API endpoint that deploys a specific model.
+"""
+
 import uuid
 
 from fastapi import APIRouter, Depends

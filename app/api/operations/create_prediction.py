@@ -1,3 +1,7 @@
+"""
+Provides the API endpoint that makes a prediction on a target variable within a given set of data.
+"""
+
 import asyncio
 import joblib
 import random # TESTING

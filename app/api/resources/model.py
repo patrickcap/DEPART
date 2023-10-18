@@ -1,3 +1,7 @@
+"""
+Specifies the information required by the user to create any model and the information that defines a completed model.
+"""
+
 from pydantic import BaseModel
 from dataclasses import dataclass
 import uuid

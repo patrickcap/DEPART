@@ -1,3 +1,7 @@
+"""
+Provides the API endpoint that deletes a given model from the model store.
+"""
+
 import uuid
 
 from fastapi import APIRouter

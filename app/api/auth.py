@@ -1,4 +1,6 @@
-# 
+"""
+Provides helper methods for validating the user's access to private endpoints in the API.
+"""
 
 import os
 

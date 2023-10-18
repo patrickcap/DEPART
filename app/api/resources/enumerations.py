@@ -1,3 +1,7 @@
+"""
+Stores enumerations used by API resources.
+"""
+
 from enum import Enum
 
 # Enumeration for the training status of a model
