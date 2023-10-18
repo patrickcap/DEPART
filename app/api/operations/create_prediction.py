@@ -10,9 +10,11 @@ from api.resources.prediction import predictions
 
 prediction_router = APIRouter(prefix='/predict')
 
-# Request, predict, and return the delay probability of a particular future flight.
 @prediction_router.post("", status_code=200)
 async def create_prediction(new_prediction: PredictionParams):
+    """
+    Use the user-specified parameters to make a prediction on a model. Return the prediction result.
+    """
 
     # Pass new_prediction to the model with id model_id
 
