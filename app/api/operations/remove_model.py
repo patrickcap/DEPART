@@ -8,8 +8,10 @@ from fastapi import APIRouter
 
 from api.resources.model import models
 
+# Provides a reference to this endpoint for use by main FastAPI object
 remove_model_router = APIRouter(prefix='/models/{model_id}')
 
+# Using a DELETE request to remove a model resource
 @remove_model_router.delete("", status_code=200)
 async def remove_model(model_id: uuid.UUID):
     """

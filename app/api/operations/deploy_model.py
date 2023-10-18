@@ -9,8 +9,10 @@ from fastapi.security.api_key import APIKey
 
 from api.auth import get_api_key
 
+# Provides a reference to this endpoint for use by main FastAPI object
 deploy_model_router = APIRouter(prefix='/deploy')
 
+# Using a PUT request to modify the state of a model
 @deploy_model_router.put("")
 async def deploy_model(model_id: uuid.UUID, api_key: APIKey = Depends(get_api_key)):
     """

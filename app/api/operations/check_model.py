@@ -8,9 +8,10 @@ from fastapi import APIRouter
 
 from api.resources.model import models
 
+# Provides a reference to this endpoint for use by main FastAPI object
 check_model_router = APIRouter(prefix='/models/{model_id}')
 
-# Check the training status of a model
+# Using a GET request to fetch model information for the user
 @check_model_router.get("", status_code=200)
 async def check_model(model_id: uuid.UUID, export: bool = False):
     """

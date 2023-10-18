@@ -9,9 +9,10 @@ from fastapi import APIRouter
 from api.resources.model import ModelParams, Model, models
 from api.resources.enumerations import ModelStatus
 
+# Provides a reference to this endpoint for use by main FastAPI object
 create_model_router = APIRouter(prefix='/models')
 
-# Request, predict, and return the delay probability of a particular future flight.
+# Using a POST request to submit model creation information from the user
 @create_model_router.post("", status_code=200)
 async def create_model(new_model: ModelParams):
     """

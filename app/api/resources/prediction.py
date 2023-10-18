@@ -2,7 +2,10 @@
 Specifies the information required by the user to make a prediction on any model.
 """
 
+import uuid
+
 from pydantic import BaseModel
+from dataclasses import dataclass
 
 # List to store PredictionParams objects
 predictions = []
@@ -17,3 +20,12 @@ class PredictionParams(BaseModel):
     day_num: int
     hour_num: int
     minute_num: int
+
+@dataclass
+class Prediction:
+    """
+    Defines the parameters of a returned prediction.
+    """
+    flight_num: str
+    delay_probability: float
+    id: uuid.UUID

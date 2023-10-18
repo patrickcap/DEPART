@@ -8,12 +8,14 @@ import random # TESTING
 import uuid
 
 from fastapi import APIRouter
-from api.resources.prediction import PredictionParams
+from api.resources.prediction import PredictionParams, Prediction
 
 from api.resources.prediction import predictions
 
+# Provides a reference to this endpoint for use by main FastAPI object
 prediction_router = APIRouter(prefix='/predict')
 
+# Using a POST request to submit prediction information from the user
 @prediction_router.post("", status_code=200)
 async def create_prediction(new_prediction: PredictionParams):
     """
@@ -28,12 +30,6 @@ async def create_prediction(new_prediction: PredictionParams):
     delay_prediction: float = random.random()
     ##############################################
 
-    lr = joblib.load('randomfs.pkl')
-
-    prediction_id: str = str(uuid.uuid4())
-    prediction = {"flight_num": new_prediction.flight_num,
-                  "delay_probability": delay_prediction,
-                  "id": prediction_id}
-
+    prediction = Prediction(flight_num=new_prediction.flight_num, delay_probability=delay_prediction, id=uuid.uuid4())
     predictions.append(prediction)
     return {"prediction": prediction}
