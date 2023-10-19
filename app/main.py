@@ -4,9 +4,9 @@ Aggregates all API routers and starts the API.
 
 import os
 from typing import Final
-import uvicorn
+import uvicorn  # pylint: disable=import-error
 
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter  # pylint: disable=import-error
 
 from api.operations.create_prediction import prediction_router  # pylint: disable=import-error
 from api.operations.create_model import create_model_router     # pylint: disable=import-error
