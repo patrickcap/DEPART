@@ -21,4 +21,5 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pwd
-        ls
+        cd app
+        pylint *.py
