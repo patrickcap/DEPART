@@ -31,4 +31,5 @@ app.include_router(deploy_model_router)
 # Run the API
 if __name__ == '__main__':
     port = os.getenv('PORT', 8080)
+    assert port is not None, port   # Convince PyLint 'port' will not be None
     uvicorn.run(app=app, port=port)
