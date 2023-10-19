@@ -20,6 +20,5 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pwd
         cd app
         pylint *.py
