@@ -3,10 +3,10 @@ Aggregates all API routers and starts the API.
 """
 
 import os
+from typing import Final
 import uvicorn
 
 from fastapi import FastAPI, APIRouter
-from typing import Final
 
 from api.operations.create_prediction import prediction_router
 from api.operations.create_model import create_model_router
