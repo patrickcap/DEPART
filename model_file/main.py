@@ -1,10 +1,11 @@
 import os
 from train_model import train_model
-#get_file_path
+
+#load and pre-process data
 csv_path = os.path.join(os.getcwd(),'data.csv')
 
-#train and save model
-train_model(csv_path,"test1")
+# train and save model
+train_model(csv_path,'test1')
 '''
 #import perfromance evaluation library
 from sklearn.model_selection import cross_val_score
@@ -44,5 +45,4 @@ plt.xlabel(r'False Positive Rate')
 plt.ylabel("True Positive Rate")
 plt.title("ROC Curve")
 plt.show()
-
 '''
