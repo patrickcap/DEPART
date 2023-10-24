@@ -8,7 +8,8 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
 ## Quick Start
 1. Clone this repository using ```git clone https://github.com/patrickcap/DEPART.git```.
 2. Navigate to the "scripts" directory by running ```cd scripts```.
-3. Launch the API by running the command ```./launch_api.sh```.
+3. Launch the API.
+```./launch_api.sh```
 
 ## Project Structure:
 - **app**: Production ready code.
