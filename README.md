@@ -6,8 +6,14 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
     - Please refer to the ```requirements.txt``` file for detailed information of required Python libraries and their respective versions.
 
 ## Quick Start
-1. Clone this repository using ```git clone https://github.com/patrickcap/DEPART.git```.
-2. Navigate to the "scripts" directory by running ```cd scripts```.
+1. Clone this repository.
+    ```
+    git clone https://github.com/patrickcap/DEPART.git
+    ```
+2. Navigate to the "scripts" directory.
+    ```
+    cd scripts
+    ```
 3. Launch the API.
     ```
     ./launch_api.sh
