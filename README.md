@@ -2,7 +2,7 @@
 DEPART is an end-to-end machine learning project with the aim of predicting the probability of delay for a given flight departing from Arturo Merino Benitez International (SCL) Airport. Given real-world airline data for SCL Airport, the overarching goals are to explore the data, train, evaluate, and select a suitable machine leanring model, and create a production-grade, scalable API for serving the model.
 
 ## Prerequisites
-- **python**==3.10
+- **Python**==3.10
     - Please refer to the ```requirements.txt``` file for detailed information of required Python libraries and their respective versions.
 
 ## Quick Start
@@ -18,6 +18,9 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
     ```
     ./launch_api.sh
     ```
+
+## Documentation
+
 
 ## Project Structure:
 - **app**: Production ready code.
