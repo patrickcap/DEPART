@@ -20,7 +20,7 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
     ```
 
 ## Documentation
-
+See [DEPART's Documentation](https://patrickcap.github.io/DEPART/index.html#) for more information about how to install and use this tool as well as the development and design processes.
 
 ## Project Structure:
 - **app**: Production ready code.
