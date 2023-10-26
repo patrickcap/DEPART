@@ -1,11 +1,11 @@
 import os
-from train_model import train_model
+from train_.train_model import train_
 
-#load and pre-process data
-csv_path = os.path.join(os.getcwd(),'data.csv')
+# load and pre-process data
+csv_path = os.path.join(os.getcwd(), 'data.csv')
 
 # train and save model
-train_model(csv_path,'test1')
+train_(csv_path, 'test1')
 '''
 #import perfromance evaluation library
 from sklearn.model_selection import cross_val_score
