@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 from typing import Optional
 
+import pandas
 from sklearn.model_selection import StratifiedShuffleSplit
-
-from train_.data_loading import DataLoader
-
+from data_loading import DataLoader
 import pandas as pd
 from pandas import DataFrame, DatetimeIndex
 
@@ -16,8 +15,8 @@ def compute_delay_helper(actual_date_time: DatetimeIndex, sched_date_time: Datet
     return int(actual_date_time > sched_date_time)
 
 
-def process_flight_num(flight_num: str) -> str:
-    # flight_num = str(flight_num)
+def process_flight_num(flight_num: pandas.Series) -> str:
+    flight_num = str(flight_num)
     flight_num = flight_num.split('.')[0]
     for i in flight_num:
         if i.isalpha():
@@ -57,7 +56,7 @@ class DataProcessor:
 
     source: str
     columns: list[str]
-    data: Optional[DataFrame]
+    data: Optional[DataFrame] = None
 
     @classmethod
     def create_preprocessor(cls, source: str, columns: list[str]):
@@ -68,13 +67,16 @@ class DataProcessor:
         self.data = DataLoader.load(self.source, self.columns)
         self.data = self.data.build_dataframe()
 
-        # Compute delay column and leave separate
-        self.data = self.compute_delay(self.data)
-
         # Handle missing values
         self.data.dropna()
 
+        # Compute delay column and leave separate
+        self.data = self.compute_delay(self.data)
+
         # Process flight numbers, making sure they only contain numbers
+        print(self.data.info())
+        print(self.data.sched_flight_num[0])
+        print(type(self.data.sched_flight_num))
         self.data.sched_flight_num = self.data.sched_flight_num.apply(process_flight_num)
 
         # Compute new features
@@ -99,7 +101,6 @@ class DataProcessor:
                                                                                format='%Y-%m-%d %H:%M:%S',
                                                                                errors='raise'))
         data = data_copy
-        print(self.data.info())
         return data
 
     def add_features(self) -> DataFrame:

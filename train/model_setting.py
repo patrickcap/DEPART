@@ -11,7 +11,7 @@ param_grid = dict({'n_estimators': [50, 200],
 
 # Define the XGB model
 XGB = XGBClassifier(max_depth=3,                    # Depth of each tree
-                            learning_rate=0.1,            # How much to shrink error in each subsequent training. Trade-off with no. estimators.
+                            learning_rate=0.1,            # How much to shrink error in each subsequent train. Trade-off with no. estimators.
                             n_estimators=5,             # How many trees to use, the more the better, but decrease learning rate if many used.
                             verbosity=1,                  # If to show more errors or not.
                             objective='binary:logistic',  # Type of target variable.

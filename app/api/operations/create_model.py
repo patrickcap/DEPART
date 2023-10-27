@@ -7,8 +7,8 @@ import uuid
 from fastapi import APIRouter
 
 from api.resources.model import models
-#get training model file
-from train_ import train_model
+#get train model file
+from train import train_model
 from fastapi import File, UploadFile
 import shutil
 

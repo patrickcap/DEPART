@@ -33,7 +33,7 @@ class DataLoader:
 
     files: str
     columns: list[str]
-    data: Optional[DataFrame]
+    data: Optional[DataFrame] = None
 
     @classmethod
     def load(cls, source: str, columns: list[str]) -> 'DataLoader':
@@ -60,7 +60,7 @@ class DataLoader:
                               "SIGLAORI": "OG_city",
                               "SIGLADES": "dest_city"
                               }
-        self.data = self.data.rename(column_translation)
+        self.data = self.data.rename(columns=column_translation)
 
     def build_dataframe(self) -> DataFrame:
         # This assumes the data is in Spanish

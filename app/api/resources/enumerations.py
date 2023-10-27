@@ -4,7 +4,7 @@ Stores enumerations used by API resources.
 
 from enum import Enum
 
-# Enumeration for the training status of a model
+# Enumeration for the train status of a model
 class ModelStatus(Enum):
     """
     Enumeration of all possible states that a model have.

@@ -1,8 +1,7 @@
 # import support file
-from data_preprocessing import *
 from model_setting import *
 # import pipeline related lib
-from train_.data_preprocessing import DataProcessor
+from data_preprocessing import DataProcessor, split_dataset
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
@@ -10,7 +9,7 @@ from sklearn.pipeline import Pipeline
 import pickle
 
 
-def train_(file_path, filename):
+def train(file_path, filename):
     # Clean up
     preprocessor = DataProcessor.create_preprocessor(file_path, ['sched_flight_num', 'sched_destination_city_code',
                                                                  'sched_airlinecode',
