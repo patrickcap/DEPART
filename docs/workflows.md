@@ -1,4 +1,4 @@
-# Quick Start
+# Workflows
 
 This page will guide you through the various workflows available to users of DEPART.
 
@@ -9,7 +9,7 @@ This workflow will explain how a user can create and train a machine learning mo
 - Inputs:
 
   - Dataset
-  - Target variable
+  - Target Variable
 
 - Outputs:
 

@@ -12,4 +12,4 @@ Welcome to DEPART's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   quick-start.md
+   workflows.md
