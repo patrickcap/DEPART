@@ -2,7 +2,10 @@ from dataclasses import dataclass
 from typing import Optional
 
 import pandas
+from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
+
 from data_loading import DataLoader
 import pandas as pd
 from pandas import DataFrame, DatetimeIndex
@@ -45,6 +48,20 @@ def is_weekend(date_time: DatetimeIndex) -> int:
         return 1
 
 
+def compute_delay(data: DataFrame) -> DataFrame:
+    data['delay'] = ''
+    data_copy = data.copy()
+    for index, row in data_copy.iterrows():
+        data_copy.at[index, 'delay'] = compute_delay_helper(pd.to_datetime(row['actual_date_time'],
+                                                                           format='%Y-%m-%d %H:%M:%S',
+                                                                           errors='raise'),
+                                                            pd.to_datetime(row['sched_date_time'],
+                                                                           format='%Y-%m-%d %H:%M:%S',
+                                                                           errors='raise'))
+    data = data_copy
+    return data
+
+
 @dataclass
 class DataProcessor:
     """
@@ -71,37 +88,38 @@ class DataProcessor:
         self.data.dropna()
 
         # Compute delay column and leave separate
-        self.data = self.compute_delay(self.data)
+        self.data = compute_delay(self.data)
 
         # Process flight numbers, making sure they only contain numbers
-        print(self.data.info())
-        print(self.data.sched_flight_num[0])
-        print(type(self.data.sched_flight_num))
         self.data.sched_flight_num = self.data.sched_flight_num.apply(process_flight_num)
 
         # Compute new features
         self.data = self.add_features()
 
         # Select useful features
-        self.data = self.data[['sched_flight_num', 'sched_destination_city_code', 'sched_airlinecode',
-                               'flight_type', 'delay', 'sched_flight_hour', 'sched_flight_minute',
-                               'sched_flight_dayofweek']]
+        self.data = self.data[['sched_destination_city_code', 'sched_airlinecode',
+                               'flight_type', 'delay', 'part_of_day', 'is_weekend', 'sched_flight_month']]
+
+        # Encode the categorical data
+        self.data = self.encode()
 
         return self.data
-        # return processed_data, delay
 
-    def compute_delay(self, data: DataFrame) -> DataFrame:
-        data['delay'] = ''
-        data_copy = data.copy()
-        for index, row in data_copy.iterrows():
-            data_copy.at[index, 'delay'] = compute_delay_helper(pd.to_datetime(row['actual_date_time'],
-                                                                               format='%Y-%m-%d %H:%M:%S',
-                                                                               errors='raise'),
-                                                                pd.to_datetime(row['sched_date_time'],
-                                                                               format='%Y-%m-%d %H:%M:%S',
-                                                                               errors='raise'))
-        data = data_copy
-        return data
+    def encode(self) -> DataFrame:
+        transformer = ColumnTransformer(transformers=[
+            ('tnf1', OrdinalEncoder(categories=[['morning', 'afternoon', 'evening', 'night'], ['N', 'I']]),
+             ['part_of_day', 'flight_type']),
+            ('tnf2', OneHotEncoder(handle_unknown='ignore', sparse_output=False, drop='first'),
+             ['sched_destination_city_code', 'sched_airlinecode', 'is_weekend', 'sched_flight_month'])
+        ], remainder='passthrough')
+
+        # Transform data using the transformations defined above
+        self.data = pd.DataFrame(transformer.fit_transform(self.data))
+
+        # Add names to the columns so that they can be address later
+        self.data.columns = transformer.get_feature_names_out()
+
+        return self.data
 
     def add_features(self) -> DataFrame:
         self.data['sched_date_time'] = pd.to_datetime(self.data['sched_date_time'],
@@ -111,6 +129,16 @@ class DataProcessor:
         self.data['is_weekend'] = self.data['sched_date_time'].apply(is_weekend)
         self.data['sched_flight_month'] = self.data['sched_date_time'].dt.month
         return self.data
+
+
+def split_dataset(data):
+    train_labels = data['remainder__delay'].copy()
+    train_labels = train_labels.astype('int')
+
+    train_data = data.drop('remainder__delay', axis=1)
+    train_data = train_data.to_numpy()
+
+    return train_data, train_labels
 
 
 # Instead of dropping features, we will just select the ones we want. This will avoid some errors if we try to drop
@@ -124,18 +152,3 @@ def drop_columns(df):
     df = df.drop(actual_drop, axis=1)
     df = df.drop(features2_drop, axis=1)
     return df
-
-def split_dataset(df):
-    split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
-    for train_index, test_index in split.split(df, df["delay"]):
-        strat_train_set = df.iloc[train_index]
-        strat_test_set = df.iloc[test_index]
-
-    train_labels = strat_train_set['delay'].copy()
-    train_labels = train_labels.astype('int')
-    train_data = strat_train_set.drop('delay', axis=1)
-
-    test_labels = strat_test_set['delay'].copy()
-    test_labels = test_labels.astype('int')
-    test_data = strat_test_set.drop('delay', axis=1)
-    return train_data, train_labels, test_data, test_labels

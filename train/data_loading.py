@@ -64,7 +64,26 @@ class DataLoader:
 
     def build_dataframe(self) -> DataFrame:
         # This assumes the data is in Spanish
-        self.data = pd.read_csv(self.files)
+        dtype = {"Fecha-I": object,
+                 "Vlo-I": object,
+                 "Ori-I": object,
+                 "Des-I": object,
+                 "Emp-I": object,
+                 "Fecha-O": object,
+                 "Vlo-O": object,
+                 "Ori-O": object,
+                 "Des-O": object,
+                 "Emp-O": object,
+                 "DIA": int,
+                 "MES": int,
+                 "AÑO": int,
+                 "DIANOM": object,
+                 "TIPOVUELO": object,
+                 "OPERA": object,
+                 "SIGLAORI": object,
+                 "SIGLADES": object
+                 }
+        self.data = pd.read_csv(self.files, dtype=dtype)
 
         self.translate_columns()
 

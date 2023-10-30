@@ -1,49 +1,54 @@
-import os
-from train_model import train
-
-# TODO: change source so that it corresponds with user input
-# os.chdir('..')
-# source = os.path.join(os.getcwd(), '/data/data.csv')
-source = 'C:/Users/win10/Documents/DEPART/data/data.csv'
-
-# train and save model
-train(source, 'test1')
+# import support file
+from model import *
+# import pipeline related lib
+from data_preprocessing import DataProcessor, split_dataset
+from model import XGBModel
+from sklearn.pipeline import Pipeline
+import pickle
 
 
-'''#import perfromance evaluation library from sklearn.model_selection import cross_val_score from sklearn.metrics 
-import recall_score, make_scorer, confusion_matrix, roc_curve, auc, accuracy_score, f1_score, roc_auc_score from 
-sklearn.metrics import ConfusionMatrixDisplay import matplotlib.pyplot as plt 
+def train(file_path, filename):
+    # Clean up
+    preprocessor = DataProcessor.create_preprocessor(file_path, ['sched_destination_city_code',
+                                                                 'sched_airlinecode',
+                                                                 'flight_type', 'sched_flight_hour',
+                                                                 'sched_flight_minute',
+                                                                 'sched_flight_dayofweek'])
+    data = preprocessor.preprocess()
 
-cv = cross_val_score(XGB_pipeline, train_data, train_labels, cv=5, scoring='accuracy', error_score='raise').mean()
-print('CV Accuracy Score: ', str(cv))
+    # Split test and train data set
+    train_data, train_labels = split_dataset(data)
 
-pred_test_labels = XGB_pipeline.fit(train_data, train_labels).predict(test_data)
+    # pipeline
+    # please add new model in model.py and just change the model function in pipeline
+    model_instance = XGBModel.new_model(max_depth=3,
+                               learning_rate=0.1,
+                               n_estimators=5,
+                               objective='binary:logistic',
+                               booster='gbtree',
+                               n_jobs=2,
+                               gamma=0.001,
+                               subsample=0.632,
+                               colsample_bytree=1,
+                               colsample_bylevel=1,
+                               colsample_bynode=1,
+                               reg_alpha=1,
+                               reg_lambda=0,
+                               scale_pos_weight=1,
+                               base_score=0.5,
+                               random_state=20212004,
+                               missing=1,
+                               use_label_encoder=False)
 
-accuracy = accuracy_score(pred_test_labels, test_labels)
-f1 = f1_score(pred_test_labels, test_labels, average="weighted")
-print('Accuracy Score: ', str(accuracy))
-print('f1 Score: ', str(f1))
+    model_instance = model_instance.fit(train_data, train_labels)
 
-cm = confusion_matrix(test_labels, pred_test_labels)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Delayed", "On Time"])
-disp.plot()
+    test_data = [train_data[0]]
 
+    prediction_proba = model_instance.predict_proba(test_data)
+    prediction = model_instance.predict(test_data)
 
-prob_test_labels = XGB_pipeline.fit(train_data, train_labels).predict_proba(test_data)
-prob_test_labels = prob_test_labels[:, 1]
+    print('True label: ', train_labels[0])
+    print('Predicted probabilities: ', prediction_proba)
+    print('Final prediction: ', prediction)
 
-# Calculate the ROC curve points
-fpr, tpr, thresholds = roc_curve(test_labels,prob_test_labels)
-
-# Save the AUC in a variable to display it
-auc = np.round(roc_auc_score(y_true = test_labels, y_score = prob_test_labels), decimals = 3)
-
-# Create and show the plot
-
-plt.plot(fpr,tpr,label="AUC = " + str(auc))
-plt.legend(loc=4)
-plt.xlabel(r'False Positive Rate')
-plt.ylabel("True Positive Rate")
-plt.title("ROC Curve")
-plt.show()
-'''
+    # pickle.dump(pipeline, open(filename, 'wb'))

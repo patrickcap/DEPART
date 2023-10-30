@@ -22,7 +22,7 @@ def train_model(file_path,filename):
     ],remainder='passthrough')
 
     #pipeline
-    #please add new model in model_setting.py and just change the model fucntion in pipeline
+    #please add new model in model.py and just change the model fucntion in pipeline
     Grid_pipeline = Pipeline([
         ('transformer', transformer),
         ('XB_boosting', GridXGB)
