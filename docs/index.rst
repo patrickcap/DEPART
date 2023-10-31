@@ -12,5 +12,5 @@ Welcome to DEPART's Documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   getting-started-user.md
    getting-started-dev.md
-   workflows.md

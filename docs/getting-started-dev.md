@@ -30,5 +30,3 @@ cd scripts
 3. A local instance of the API should start running with a link provided in the terminal response to access the API.
 
 4. Append "/docs" to the end of this URL and paste it into an internet browser. The result should be a FastAPI user interface for DEPART.
-
-## Code Structure
