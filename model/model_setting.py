@@ -39,7 +39,7 @@ XGB = XGBClassifier(max_depth=3,        # Depth of each tree
         )
 
 # Define grid search object.
-GridXGB = GridSearchCV(XGB,             # Original XGB.
+grid_xgb = GridSearchCV(XGB,             # Original XGB.
                 param_grid,          # Parameter grid
                 cv = 5,              # Number of cross-validation folds.
                 scoring = 'balanced_accuracy', # How to rank outputs.

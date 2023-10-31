@@ -1,4 +1,7 @@
-# Configuration file for the Sphinx documentation builder.
+""" 
+Configuration file for the Sphinx documentation builder.
+"""
+
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
@@ -7,9 +10,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 PROJECT = 'DEPART'
-copyright = 'Patrick Capaldo, Kaixin Wang, Delaney Stevens, and Claudia de la Paz'
+COPYRIGHT = 'Patrick Capaldo, Kaixin Wang, Delaney Stevens, and Claudia de la Paz'
 AUTHOR = 'Patrick Capaldo, Kaixin Wang, Delaney Stevens, and Claudia de la Paz'
-release = '0.1'
+RELEASE = '0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -24,7 +27,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+HTML_THEME = 'sphinx_rtd_theme'
+HTML_STATIC_PATH = ['_static']
 # Prevent "Built with Sphinx using a theme provided by Read the Docs." from showing
-html_show_sphinx = False
+HTML_SHOW_SPHINX = False

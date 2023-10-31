@@ -3,8 +3,9 @@ Helper function to train machine learning model
 """
 
 import pickle
-from data_processing import *
-from model_setting import *
+from data_processing import (load_data, compute_delay, drop_columns,
+                             process_add_columns, split_dataset)
+from model_setting import grid_xgb
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
@@ -31,7 +32,7 @@ def train_model(file_path,filename):
     #please add new model in model_setting.py and just change the model fucntion in pipeline
     grid_pipeline = Pipeline([
         ('transformer', transformer),
-        ('XB_boosting', GridXGB)
+        ('XB_boosting', grid_xgb)
         ])
     # Train it and print the best parameters (3 pts)
     grid_pipeline.fit(train_data, train_labels)
