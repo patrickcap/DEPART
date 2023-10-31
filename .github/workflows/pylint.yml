@@ -21,8 +21,4 @@ jobs:
         pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
-        pwd
-        pylint --generate-rcfile > .pylintrc
-        echo "init-hook='import sys; sys.path.append(r'/home/runner/work/DEPART/DEPART/app')'" >> .pylintrc
-        cat .pylintrc
         pylint $(find . -name "*.py" | xargs)
