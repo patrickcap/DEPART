@@ -1,17 +1,16 @@
 import os
-from train_model import train_model
+from train import train
 
-#load and pre-process data
-csv_path = os.path.join(os.getcwd(),'data.csv')
+# TODO: change source so that it corresponds with user input
+source = 'C:/Users/win10/Documents/DEPART/data/data.csv'
 
 # train and save model
-train_model(csv_path,'test1')
-'''
-#import perfromance evaluation library
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import recall_score, make_scorer, confusion_matrix, roc_curve, auc, accuracy_score, f1_score, roc_auc_score
-from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
+train(source, 'test1')
+
+
+'''#import perfromance evaluation library from sklearn.model_selection import cross_val_score from sklearn.metrics 
+import recall_score, make_scorer, confusion_matrix, roc_curve, auc, accuracy_score, f1_score, roc_auc_score from 
+sklearn.metrics import ConfusionMatrixDisplay import matplotlib.pyplot as plt 
 
 cv = cross_val_score(XGB_pipeline, train_data, train_labels, cv=5, scoring='accuracy', error_score='raise').mean()
 print('CV Accuracy Score: ', str(cv))

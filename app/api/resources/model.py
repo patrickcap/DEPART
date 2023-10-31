@@ -3,12 +3,13 @@ Specifies the information required by the user to create any model and the infor
 """
 import uuid
 from dataclasses import dataclass
-from pydantic import BaseModel
-
+from train import XGBModel
+from .enumerations import ModelStatus
 # List to store Model objects
-models = []
+models = {}
 
-class ModelParams(BaseModel):
+@dataclass
+class ModelParams:
     """
     Defines the parameters a user must specify to create a model.
     """
@@ -23,6 +24,6 @@ class Model:
     Defines the parameters of a created model.
     """
     id: uuid.UUID
-    status: str
-    # model: None | (something else, sklearn object, ...)
-    params: ModelParams
+    status: ModelStatus
+    model: XGBModel
+    #params: ModelParams
