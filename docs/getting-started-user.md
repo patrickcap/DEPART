@@ -32,6 +32,6 @@ Step A.5: Predict with the Model
 
 Step B.1: Delete a Model
 * If a model is present within the current API session, it can be deleted by exeucting the `DELETE /models` endpoint with the unique identifier for that model.
-* If the model cannoy be found, its removal will fail.
+* If the model cannot be found, its removal will fail.
 
 
