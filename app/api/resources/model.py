@@ -1,5 +1,5 @@
 """
-Specifies the information required by the user to create any 
+Specifies the information required by the user to create any
 model and the information that defines a completed model.
 """
 import uuid
