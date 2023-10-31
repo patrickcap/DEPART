@@ -2,7 +2,7 @@
 Aggregates all API routers and starts the API.
 """
 
-import os, sys
+import os
 from typing import Final
 import uvicorn
 
