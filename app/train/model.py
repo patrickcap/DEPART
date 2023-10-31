@@ -1,6 +1,4 @@
 from dataclasses import dataclass
-
-from sklearn.model_selection import GridSearchCV
 from xgboost import XGBClassifier
 
 
@@ -29,25 +27,25 @@ class XGBModel:
         """
         instance = cls(_model=None)
 
-        instance._model = XGBClassifier(max_depth=3,
-                                        learning_rate=0.1,
-                                        n_estimators=5,
+        instance._model = XGBClassifier(max_depth=max_depth,
+                                        learning_rate=learning_rate,
+                                        n_estimators=n_estimators,
                                         verbosity=1,
-                                        objective='binary:logistic',
-                                        booster='gbtree',
-                                        n_jobs=2,
-                                        gamma=0.001,
-                                        subsample=0.632,
-                                        colsample_bytree=1,
-                                        colsample_bylevel=1,
-                                        colsample_bynode=1,
-                                        reg_alpha=1,
-                                        reg_lambda=0,
-                                        scale_pos_weight=1,
-                                        base_score=0.5,
-                                        random_state=20212004,
-                                        missing=1,
-                                        use_label_encoder=False
+                                        objective=objective,
+                                        booster=booster,
+                                        n_jobs=n_jobs,
+                                        gamma=gamma,
+                                        subsample=subsample,
+                                        colsample_bytree=colsample_bytree,
+                                        colsample_bylevel=colsample_bylevel,
+                                        colsample_bynode=colsample_bynode,
+                                        reg_alpha=reg_alpha,
+                                        reg_lambda=reg_lambda,
+                                        scale_pos_weight=scale_pos_weight,
+                                        base_score=base_score,
+                                        random_state=random_state,
+                                        missing=missing,
+                                        use_label_encoder=use_label_encoder
                                         )
 
         return instance._model
