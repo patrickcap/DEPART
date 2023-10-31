@@ -16,7 +16,7 @@ class ModelParams(BaseModel):
     param_x: str
     param_y: str
     param_z: str
-    # dataset, target (delay column), optionals with defaults: 
+    # dataset, target (delay column), optionals with defaults:
     # hyperparameter optimisation, model type (maybe, harder)
 
 @dataclass
