@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'DEPART'
+PROJECT = 'DEPART'
 copyright = 'Patrick Capaldo, Kaixin Wang, Delaney Stevens, and Claudia de la Paz'
-author = 'Patrick Capaldo, Kaixin Wang, Delaney Stevens, and Claudia de la Paz'
+AUTHOR = 'Patrick Capaldo, Kaixin Wang, Delaney Stevens, and Claudia de la Paz'
 release = '0.1'
 
 
