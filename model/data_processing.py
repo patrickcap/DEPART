@@ -108,8 +108,7 @@ def is_weekend(date_time):
     dayofweek = date_time.dayofweek
     if dayofweek < 5:
         return 0
-    else:
-        return 1
+    return 1
 
 def process_add_columns(df):
     """
