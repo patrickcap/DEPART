@@ -27,6 +27,7 @@ async def create_model(data_file: str, params: ModelParams):
     # then add to list
     model_id = uuid.uuid4()
     trained_model = train.train(data_file, params)
+    print(model_id)
     model = Model(id=model_id, status=ModelStatus.PENDING.value, params=params, model=trained_model)
     models[model_id] = model
 
