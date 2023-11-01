@@ -1,19 +1,22 @@
-import uuid
-from typing import Type
+"""
+Create an instance of a trained model using data provided
+"""
 
 from pandas import DataFrame
 from xgboost import XGBClassifier
 from .data_preprocessing import DataProcessor, split_dataset
-import pickle
 from .model import XGBModel
 
-
 def train(file_path: str, params) -> XGBClassifier:
-    preprocessor: DataProcessor = DataProcessor.create_preprocessor(file_path, ['sched_destination_city_code',
-                                                                                'sched_airlinecode',
-                                                                                'flight_type', 'sched_flight_hour',
-                                                                                'sched_flight_minute',
-                                                                                'sched_flight_dayofweek'])
+    """
+    Train a machine learning model with the data from the path provided
+    """
+    preprocessor: DataProcessor = DataProcessor.create_preprocessor(
+        file_path, ['sched_destination_city_code',
+                    'sched_airlinecode',
+                    'flight_type', 'sched_flight_hour',
+                    'sched_flight_minute',
+                    'sched_flight_dayofweek'])
     data: DataFrame = preprocessor.preprocess()
 
     # Split test and train data set

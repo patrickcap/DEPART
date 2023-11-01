@@ -1,13 +1,19 @@
+"""
+Access data to learn and organise it into a DataFrame object
+"""
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
 import pandas as pd
-import numpy as np
 from pandas import DataFrame
 
 
 def discover_csv_files(source: str) -> str:
+    """
+    Search for data in specified path location
+    """
     csv_folder_path = Path(source)
 
     # TODO: Add functionality to handle a dir with several .csv files
@@ -37,10 +43,16 @@ class DataLoader:
 
     @classmethod
     def load(cls, source: str, columns: list[str]) -> 'DataLoader':
+        """
+        If the data is found in the given path, prepare it for reading
+        """
         files = discover_csv_files(source)
         return cls(files=files, columns=columns)
 
     def translate_columns(self):
+        """
+        Translate column names from Spanish to English
+        """
         column_translation = {"Fecha-I": "sched_date_time",
                               "Vlo-I": "sched_flight_num",
                               "Ori-I": "sched_OG_city_code",
@@ -63,6 +75,9 @@ class DataLoader:
         self.data = self.data.rename(columns=column_translation)
 
     def build_dataframe(self) -> DataFrame:
+        """
+        Transfer the input CSV data to a DataFrame object
+        """
         # This assumes the data is in Spanish
         dtype = {"Fecha-I": object,
                  "Vlo-I": object,

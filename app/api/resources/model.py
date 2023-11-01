@@ -34,7 +34,8 @@ class ModelParams:
     random_state: int = 20212004
     missing: int = 1
     use_label_encoder: bool = False
-    # dataset, target (delay column), optionals with defaults: hyperparameter optimisation, model type (maybe, harder)
+    # dataset, target (delay column), optionals with defaults: 
+    # hyperparameter optimisation, model type (maybe, harder)
 
 @dataclass
 class Model:

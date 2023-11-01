@@ -27,7 +27,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+# html_theme must be lower case to be recognised by Sphinx
+html_theme = 'sphinx_rtd_theme' # pylint: disable=invalid-name
 HTML_STATIC_PATH = ['_static']
 # Prevent "Built with Sphinx using a theme provided by Read the Docs." from showing
 HTML_SHOW_SPHINX = False
