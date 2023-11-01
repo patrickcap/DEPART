@@ -28,10 +28,13 @@ async def create_prediction(prediction_params: PredictionParams):
                                                           index = [0]))
     
     # Process the dataframe 
-    prediction_data = user_input_processor.add_features()
-    prediction_data = prediction_data[['sched_destination_city_code', 'sched_airlinecode',
+    user_input_processor.add_features()
+    user_input_processor.data = user_input_processor.data[['sched_destination_city_code', 'sched_airlinecode',
                                        'flight_type', 'part_of_day', 'is_weekend', 'sched_flight_month']]
+    print(user_input_processor.data.info())
+    prediction_data = user_input_processor.encode()
 
-    delay_prediction = CURRENT_MODEL[0].model.predict_proba(prediction_data)
+    print(prediction_data.info())
+    delay_prediction = CURRENT_MODEL[0].model.predict_proba(prediction_data.iloc[0])
 
     return {"message": delay_prediction}
