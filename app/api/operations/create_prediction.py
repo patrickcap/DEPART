@@ -3,13 +3,11 @@ Provides the API endpoint that makes a prediction on a target variable within a 
 """
 
 import asyncio
-import joblib
 import random # TESTING
 import uuid
 
 from fastapi import APIRouter
 from api.resources.prediction import PredictionParams, Prediction
-
 from api.resources.prediction import predictions
 
 # Provides a reference to this endpoint for use by main FastAPI object
@@ -30,6 +28,7 @@ async def create_prediction(new_prediction: PredictionParams):
     delay_prediction: float = random.random()
     ##############################################
 
-    prediction = Prediction(flight_num=new_prediction.flight_num, delay_probability=delay_prediction, id=uuid.uuid4())
+    prediction = Prediction(flight_num=new_prediction.flight_num,
+                            delay_probability=delay_prediction, id=uuid.uuid4())
     predictions.append(prediction)
     return {"prediction": prediction}

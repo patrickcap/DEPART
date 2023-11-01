@@ -4,7 +4,7 @@ Provides helper methods for validating the user's access to private endpoints in
 
 import os
 
-from fastapi import status, Security, HTTPException # pylint: 
+from fastapi import status, Security, HTTPException
 from fastapi.security import APIKeyHeader
 
 # API key for private endpoints that require a valid API key

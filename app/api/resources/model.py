@@ -1,5 +1,6 @@
 """
-Specifies the information required by the user to create any model and the information that defines a completed model.
+Specifies the information required by the user to create any
+model and the information that defines a completed model.
 """
 import uuid
 from dataclasses import dataclass
@@ -15,7 +16,8 @@ class ModelParams(BaseModel):
     param_x: str
     param_y: str
     param_z: str
-    # dataset, target (delay column), optionals with defaults: hyperparameter optimisation, model type (maybe, harder)
+    # dataset, target (delay column), optionals with defaults:
+    # hyperparameter optimisation, model type (maybe, harder)
 
 @dataclass
 class Model:
