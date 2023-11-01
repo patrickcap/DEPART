@@ -21,7 +21,8 @@ create_model_router = APIRouter(prefix='/models')
 @create_model_router.post("/train")
 async def create_model(data_file: str, params: ModelParams):
     """
-    Use the user-specified parameters to create, train, and store a model. Return a model identifier and status.
+    Use the user-specified parameters to create, train, and store a model.
+    Return a model identifier and status.
     """
     # Create unique id for this model, set status to pending and copy model parameters to new completed model object,
     # then add to list
