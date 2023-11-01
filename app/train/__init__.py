@@ -1,3 +1,7 @@
+"""
+Initialise variables that must be imported in other files
+"""
+
 from train.data_preprocessing import DataProcessor
 from train.data_loading import DataLoader
 from train import train

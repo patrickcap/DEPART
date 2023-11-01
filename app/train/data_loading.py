@@ -19,13 +19,10 @@ def discover_csv_files(source: str) -> str:
     # TODO: Add functionality to handle a dir with several .csv files
     if csv_folder_path.is_file() and '.csv' == csv_folder_path.suffix:
         return source
-
-    else:
-        raise Exception(
-            f'DATA_CONFIG_ERROR: {source} is not a valid directory, file, or could not be read'
-        )
+    raise Exception(
+        f'DATA_CONFIG_ERROR: {source} is not a valid directory, file, or could not be read'
+    )
     return source
-
 
 @dataclass
 class DataLoader:
