@@ -7,8 +7,9 @@ from train import XGBModel
 from .enumerations import ModelStatus
 
 # List to store Model objects
+# global MODELS
+# MODELS = {}
 models = {}
-
 
 @dataclass
 class ModelParams:
@@ -45,3 +46,4 @@ class Model:
     status: ModelStatus
     model: XGBModel
     params: ModelParams
+

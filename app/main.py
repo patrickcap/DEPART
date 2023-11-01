@@ -28,6 +28,7 @@ app.include_router(remove_model_router)
 app.include_router(check_model_router)
 app.include_router(deploy_model_router)
 
+
 # Run the API
 if __name__ == '__main__':
     port = int(os.getenv('PORT', "8080"))

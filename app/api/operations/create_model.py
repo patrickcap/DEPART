@@ -27,7 +27,7 @@ async def create_model(data_file: str, params: ModelParams):
     # then add to list
     model_id = uuid.uuid4()
     trained_model = train.train(data_file, params)
-    model = Model(id=model_id, status=ModelStatus.PENDING.value, params=params, model=trained_model)
+    model = Model(id=model_id, status=ModelStatus.COMPLETED, params=params, model=trained_model)
     models[model_id] = model
 
     return {"message": "New model (" + str(model_id) + ") has status " + str(model.status) + "."}

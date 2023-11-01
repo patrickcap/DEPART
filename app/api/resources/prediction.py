@@ -2,30 +2,14 @@
 Specifies the information required by the user to make a prediction on any model.
 """
 
-import uuid
-
-from pydantic import BaseModel
 from dataclasses import dataclass
 
-# List to store PredictionParams objects
-predictions = []
-
-class PredictionParams(BaseModel):
+@dataclass
+class PredictionParams:
     """
     Defines the parameters required to make a predicition using any model that can be created by the user.
     """
-    flight_num: str
-    year_num: int
-    month_num: int
-    day_num: int
-    hour_num: int
-    minute_num: int
-
-@dataclass
-class Prediction:
-    """
-    Defines the parameters of a returned prediction.
-    """
-    flight_num: str
-    delay_probability: float
-    id: uuid.UUID
+    destination_city_code: str
+    sched_airlinecode: str
+    flight_type: str
+    sched_date_time: object
