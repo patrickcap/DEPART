@@ -20,6 +20,6 @@ async def remove_model(model_id: uuid.UUID):
     # Find model in database
     for model in models:
         if model_id == model.id:
-            models.remove(model)
+            models.pop(model)
             return {"message": "Model successfully removed."}
     return {"message": "No model found with that ID."}

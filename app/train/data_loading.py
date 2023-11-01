@@ -22,7 +22,6 @@ def discover_csv_files(source: str) -> str:
     raise Exception(
         f'DATA_CONFIG_ERROR: {source} is not a valid directory, file, or could not be read'
     )
-    return source
 
 @dataclass
 class DataLoader:
