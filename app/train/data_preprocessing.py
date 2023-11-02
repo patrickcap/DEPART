@@ -74,7 +74,7 @@ class DataProcessor:
         self.data = self.data.build_dataframe()
 
         # Handle missing values
-        self.data.dropna()
+        self.data.dropna() 
 
         # Compute delay column and leave separate
         self.data = compute_delay(self.data)
@@ -112,6 +112,8 @@ class DataProcessor:
         self.data['part_of_day'] = self.data['sched_date_time'].apply(get_part_of_day)
         self.data['is_weekend'] = self.data['sched_date_time'].apply(is_weekend)
         self.data['sched_flight_month'] = self.data['sched_date_time'].dt.month
+        if 'sched_date_time' in self.data:
+            self.data = self.data.drop('sched_date_time',axis=1)
         return self.data
 
 
