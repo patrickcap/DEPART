@@ -35,6 +35,6 @@ async def create_prediction(prediction_params: PredictionParams):
     prediction_data = user_input_processor.encode()
 
     print(prediction_data.info())
-    delay_prediction = CURRENT_MODEL[0].model.predict_proba(prediction_data.iloc[0])
+    delay_prediction = CURRENT_MODEL[0].model.predict(prediction_data.iloc[0])
 
     return {"message": delay_prediction}
