@@ -1,16 +1,19 @@
 """
 Create an instance of a trained model using data provided
 """
-
+import uuid
 from pandas import DataFrame
 from xgboost import XGBClassifier
 from .data_preprocessing import DataProcessor, split_dataset
 from .model import XGBModel
+from api.resources import ModelStatus
 
-def train(file_path: str, params) -> XGBClassifier:
+
+def train(file_path: str, params, model) -> XGBClassifier:
     """
     Train a machine learning model with the data from the path provided
     """
+
     preprocessor: DataProcessor = DataProcessor.create_preprocessor(
         file_path, ['sched_destination_city_code',
                     'sched_airlinecode',
@@ -42,7 +45,14 @@ def train(file_path: str, params) -> XGBClassifier:
                                                        params.random_state,
                                                        params.missing,
                                                        params.use_label_encoder)
+    model.status = ModelStatus.IN_PROGRESS
 
-    model_instance: XGBClassifier = model_instance.fit(train_data, train_labels)
+    try:
+        model_instance: XGBClassifier = model_instance.fit(train_data, train_labels)
+        model.status = ModelStatus.COMPLETED
+        model.model = model_instance
+    except ValueError:
+        model.status = ModelStatus.FAILED
+        print(f'The model has status {model.status.value}: Something went wrong during training')
 
-    return model_instance
+    return model
