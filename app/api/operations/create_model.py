@@ -26,7 +26,7 @@ async def create_model(data_file: str, params: ModelParams):
     model_id = uuid.uuid4()
 
     # Instance of Model containing the trained model
-    model = Model(id=model_id, status=ModelStatus.PENDING.value, params=params, model=None)
+    model = Model(id=model_id, status=ModelStatus.PENDING, params=params, model=None)
     trained_model = train.train(data_file, params, model)
     models[model_id] = trained_model
 

@@ -45,14 +45,14 @@ def train(file_path: str, params, model) -> XGBClassifier:
                                                        params.random_state,
                                                        params.missing,
                                                        params.use_label_encoder)
-    model.status = ModelStatus.IN_PROGRESS.value
+    model.status = ModelStatus.IN_PROGRESS
 
     try:
         model_instance: XGBClassifier = model_instance.fit(train_data, train_labels)
-        model.status = ModelStatus.COMPLETED.value
+        model.status = ModelStatus.COMPLETED
         model.model = model_instance
     except ValueError:
-        model.status = ModelStatus.FAILED.value
-        print(f'The model has status {model.status}: Something went wrong during training')
+        model.status = ModelStatus.FAILED
+        print(f'The model has status {model.status.value}: Something went wrong during training')
 
     return model
