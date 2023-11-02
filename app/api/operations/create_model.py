@@ -6,8 +6,9 @@ import uuid
 
 from fastapi import APIRouter
 
-from api.resources.model import models, ModelParams
+from api.resources.model import models, ModelParams, Model, ModelStatus
 from train import train
+
 
 # Provides a reference to this endpoint for use by main FastAPI object
 create_model_router = APIRouter(prefix='/models')
@@ -26,7 +27,8 @@ async def create_model(data_file: str, params: ModelParams):
     model_id = uuid.uuid4()
 
     # Instance of Model containing the trained model
-    trained_model = train.train(data_file, model_id, params)
+    model = Model(id=model_id, status=ModelStatus.PENDING.value, params=params, model=None)
+    trained_model = train.train(data_file, params, model)
     models[model_id] = trained_model
 
     return {"message": "New model (" + str(model_id) + ") has status " + str(trained_model.status) + "."}
