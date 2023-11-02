@@ -51,5 +51,10 @@ async def upload_model(model_file: str):
     except:
         model.status = ModelStatus.FAILED
 
-    return {
-        "message": "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
+    return {"message": 
+            "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
+
+@create_model_router.get("/all")
+async def get_all_models():
+    return {str(list(models.keys()))}
+

@@ -18,8 +18,8 @@ async def remove_model(model_id: uuid.UUID):
     Delete the model specified by the given identifier from the model store.
     """
     # Find model in database
-    for model in models:
-        if model_id == model.id:
-            models.pop(model)
-            return {"message": "Model successfully removed."}
-    return {"message": "No model found with that ID."}
+    try:
+            models.pop(model_id)
+            return {"message" : "Model "+str(model_id)+ " is deleted from the storage"}
+    except:
+            return {"message": "No model found with that ID."}
