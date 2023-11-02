@@ -2,9 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 import pandas
-from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 
 import pandas as pd
 from pandas import DataFrame, DatetimeIndex
@@ -86,8 +84,6 @@ class DataProcessor:
         self.data = self.data[['sched_destination_city_code', 'sched_airlinecode',
                                'flight_type', 'delay', 'part_of_day', 'is_weekend', 'sched_flight_month']]
 
-        # Encode the categorical data
-        self.data = self.encode()
 
         return self.data
 
@@ -104,11 +100,11 @@ class DataProcessor:
 
 
 def split_dataset(data):
-    train_labels = data['remainder__delay'].copy()
+    train_labels = data['delay'].copy()
     train_labels = train_labels.astype('int')
 
-    train_data = data.drop('remainder__delay', axis=1)
-    train_data = train_data.to_numpy()
+    train_data = data.drop('delay', axis=1)
+    #train_data = train_data.to_numpy()
 
     return train_data, train_labels
 
