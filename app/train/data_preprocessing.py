@@ -16,16 +16,6 @@ from .data_loading import DataLoader
 def compute_delay_helper(actual_date_time: DatetimeIndex, sched_date_time: DatetimeIndex) -> int:
     return int(actual_date_time > sched_date_time)
 
-
-def process_flight_num(flight_num: pandas.Series) -> str:
-    flight_num = str(flight_num)
-    flight_num = flight_num.split('.')[0]
-    for i in flight_num:
-        if i.isalpha():
-            flight_num = flight_num.replace(i, str(ord(i)))
-    return flight_num
-
-
 def get_part_of_day(date_time: DatetimeIndex) -> str:
     h = date_time.hour
     return (
@@ -88,9 +78,6 @@ class DataProcessor:
 
         # Compute delay column and leave separate
         self.data = compute_delay(self.data)
-
-        # Process flight numbers, making sure they only contain numbers
-        self.data.sched_flight_num = self.data.sched_flight_num.apply(process_flight_num)
 
         # Compute new features
         self.data = self.add_features()
