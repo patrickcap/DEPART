@@ -91,20 +91,6 @@ class DataProcessor:
 
         return self.data
 
-    def encode(self) -> DataFrame:
-        transformer = ColumnTransformer(transformers=[
-            ('tnf2', OneHotEncoder(handle_unknown='ignore', sparse_output=False, drop='first'),
-             ['sched_destination_city_code', 'sched_airlinecode', 'flight_num'])
-        ], remainder='passthrough')
-
-        # Transform data using the transformations defined above
-        self.data = pd.DataFrame(transformer.fit_transform(self.data))
-
-        # Add names to the columns so that they can be address later
-        self.data.columns = transformer.get_feature_names_out()
-
-        return self.data
-
     def add_features(self) -> DataFrame:
         self.data['sched_date_time'] = pd.to_datetime(self.data['sched_date_time'],
                                                       format='%Y-%m-%d %H:%M:%S',
