@@ -3,7 +3,7 @@ Provides the API endpoint that makes a prediction on a target variable within a 
 """
 
 import asyncio
-import random # TESTING
+import random  # TESTING
 import uuid
 
 from fastapi import APIRouter
@@ -12,6 +12,7 @@ from api.resources.prediction import predictions
 
 # Provides a reference to this endpoint for use by main FastAPI object
 prediction_router = APIRouter(prefix='/predict')
+
 
 # Using a POST request to submit prediction information from the user
 @prediction_router.post("", status_code=200)

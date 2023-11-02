@@ -6,11 +6,8 @@ import uuid
 
 from fastapi import APIRouter
 
-from api.resources.model import models, ModelParams
-from api.resources import Model, ModelStatus
-# get train model file
+from api.resources.model import models, ModelParams, Model, ModelStatus
 from train import train
-import pickle
 
 # Provides a reference to this endpoint for use by main FastAPI object
 create_model_router = APIRouter(prefix='/models')
@@ -27,11 +24,14 @@ async def create_model(data_file: str, params: ModelParams):
     # copy model parameters to new completed model object,
     # then add to list
     model_id = uuid.uuid4()
-    trained_model = train.train(data_file, params)
-    model = Model(id=model_id, status=ModelStatus.COMPLETED, params=params, model=trained_model)
-    models[model_id] = model
 
-    return {"message": "New model (" + str(model_id) + ") has status " + str(model.status) + "."}
+    # Instance of Model containing the trained model
+    model = Model(id=model_id, status=ModelStatus.PENDING, params=params, model=None)
+    trained_model = train.train(data_file, params, model)
+    models[model_id] = trained_model
+
+    return {"message": "New model (" + str(model_id) + ") has status " + str(trained_model.status) + "."}
+
 
 @create_model_router.post("/upload")
 async def upload_model(model_file: str):
@@ -43,12 +43,13 @@ async def upload_model(model_file: str):
     model = Model(id=model_id, status=ModelStatus.PENDING, params=None, model=None)
 
     try:
-        with open(model_file, "rb" ) as input_file:
+        with open(model_file, "rb") as input_file:
             loaded_file = pickle.load(input_file)
-        model.model=loaded_file
+        model.model = loaded_file
         model.status = ModelStatus.COMPLETED
         models[model_id] = model
     except:
         model.status = ModelStatus.FAILED
 
-    return {"message": "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
+    return {
+        "message": "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
