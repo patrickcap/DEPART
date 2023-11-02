@@ -8,6 +8,7 @@ from fastapi import APIRouter
 
 from api.resources.model import models, ModelParams, Model, ModelStatus
 from train import train
+import pickle
 
 # Provides a reference to this endpoint for use by main FastAPI object
 create_model_router = APIRouter(prefix='/models')
