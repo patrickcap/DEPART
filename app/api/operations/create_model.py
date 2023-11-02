@@ -32,3 +32,23 @@ async def create_model(data_file: str, params: ModelParams):
     models[model_id] = trained_model
 
     return {"message": "New model (" + str(model_id) + ") has status " + str(trained_model.status) + "."}
+
+@create_model_router.post("/upload")
+async def upload_model(model_file: str):
+    """
+    Use local exist trained model file by uploading to api
+    Return a model identifier and status.
+    """
+    model_id = uuid.uuid4()
+    model = Model(id=model_id, status=ModelStatus.PENDING, params=None, model=None)
+
+    try:
+        with open(model_file, "rb" ) as input_file:
+            loaded_file = pickle.load(input_file)
+        model.model=loaded_file
+        model.status = ModelStatus.COMPLETED
+        models[model_id] = model
+    except:
+        model.status = ModelStatus.FAILED
+
+    return {"message": "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
