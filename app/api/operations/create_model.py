@@ -10,6 +10,7 @@ from api.resources.model import models, ModelParams
 from api.resources import Model, ModelStatus
 # get train model file
 from train import train
+import pickle
 
 # Provides a reference to this endpoint for use by main FastAPI object
 create_model_router = APIRouter(prefix='/models')
@@ -27,7 +28,27 @@ async def create_model(data_file: str, params: ModelParams):
     # then add to list
     model_id = uuid.uuid4()
     trained_model = train.train(data_file, params)
-    model = Model(id=model_id, status=ModelStatus.PENDING.value, params=params, model=trained_model)
+    model = Model(id=model_id, status=ModelStatus.COMPLETED, params=params, model=trained_model)
     models[model_id] = model
 
     return {"message": "New model (" + str(model_id) + ") has status " + str(model.status) + "."}
+
+@create_model_router.post("/upload")
+async def upload_model(model_file: str):
+    """
+    Use local exist trained model file by uploading to api
+    Return a model identifier and status.
+    """
+    model_id = uuid.uuid4()
+    model = Model(id=model_id, status=ModelStatus.PENDING, params=None, model=None)
+
+    try:
+        with open(model_file, "rb" ) as input_file:
+            loaded_file = pickle.load(input_file)
+        model.model=loaded_file
+        model.status = ModelStatus.COMPLETED
+        models[model_id] = model
+    except:
+        model.status = ModelStatus.FAILED
+
+    return {"message": "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
