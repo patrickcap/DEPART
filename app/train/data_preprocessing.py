@@ -19,13 +19,13 @@ def compute_delay_helper(actual_date_time: DatetimeIndex, sched_date_time: Datet
 def get_part_of_day(date_time: DatetimeIndex) -> str:
     h = date_time.hour
     return (
-        "morning"
+        1
         if 5 <= h <= 11
-        else "afternoon"
+        else 2
         if 12 <= h <= 17
-        else "evening"
+        else 3
         if 18 <= h <= 22
-        else "night"
+        else 4
     )
 
 
