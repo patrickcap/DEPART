@@ -93,10 +93,8 @@ class DataProcessor:
 
     def encode(self) -> DataFrame:
         transformer = ColumnTransformer(transformers=[
-            ('tnf1', OrdinalEncoder(categories=[['morning', 'afternoon', 'evening', 'night'], ['N', 'I']]),
-             ['part_of_day', 'flight_type']),
             ('tnf2', OneHotEncoder(handle_unknown='ignore', sparse_output=False, drop='first'),
-             ['sched_destination_city_code', 'sched_airlinecode', 'is_weekend', 'sched_flight_month'])
+             ['sched_destination_city_code', 'sched_airlinecode', 'flight_num'])
         ], remainder='passthrough')
 
         # Transform data using the transformations defined above
