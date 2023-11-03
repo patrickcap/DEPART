@@ -11,7 +11,7 @@ from fastapi import FastAPI, APIRouter
 from api.operations.create_prediction import prediction_router
 from api.operations.create_model import create_model_router
 from api.operations.remove_model import remove_model_router
-from api.operations.check_model import check_model_router
+from api.operations.get_model import check_model_router
 from api.operations.deploy_model import deploy_model_router
 
 # Allow versioning of the API via the URI path

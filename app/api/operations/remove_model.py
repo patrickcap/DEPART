@@ -19,6 +19,7 @@ async def remove_model(model_id: uuid.UUID):
     """
     Delete the model specified by the given identifier from the model store.
     """
+    
     # Throw error 0.5% of the time
     if random.randint(0, 1000) <= 5:
         raise HTTPException(status_code=500, detail="Unforseen error.")

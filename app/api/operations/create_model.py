@@ -8,6 +8,7 @@ from fastapi import APIRouter
 
 from api.resources.model import models, ModelParams, Model, ModelStatus
 from train import train
+import pickle
 
 # Provides a reference to this endpoint for use by main FastAPI object
 create_model_router = APIRouter(prefix='/models')
@@ -51,5 +52,10 @@ async def upload_model(model_file: str):
     except:
         model.status = ModelStatus.FAILED
 
-    return {
-        "message": "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
+    return {"message": 
+            "Trained model (" + str(model_id) + ") has status " + str(model.status) + "is added into models."}
+
+@create_model_router.get("/all")
+async def get_all_models():
+    return {str(list(models.keys()))}
+
