@@ -1,19 +1,23 @@
-import uuid
-from typing import Type
+"""
+Training the model
+"""
 
 from pandas import DataFrame
 from xgboost import XGBClassifier
 from .data_preprocessing import DataProcessor, split_dataset
-import pickle
 from .model_pipeline import XGBModel
 
 
 def train(file_path: str, params) -> XGBClassifier:
-    preprocessor: DataProcessor = DataProcessor.create_preprocessor(file_path, ['sched_destination_city_code',
-                                                                                'sched_airlinecode',
-                                                                                'flight_type', 'sched_flight_hour',
-                                                                                'sched_flight_minute',
-                                                                                'sched_flight_dayofweek'])
+    """
+    Remove this docstring on merge
+    """
+    preprocessor: DataProcessor = DataProcessor.create_preprocessor(
+        file_path, ['sched_destination_city_code',
+        'sched_airlinecode',
+        'flight_type', 'sched_flight_hour',
+        'sched_flight_minute',
+        'sched_flight_dayofweek'])
     data: DataFrame = preprocessor.preprocess()
 
     # Split test and train data set
