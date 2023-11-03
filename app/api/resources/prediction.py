@@ -4,6 +4,7 @@ Specifies the information required by the user to make a prediction on any model
 
 from dataclasses import dataclass
 
+
 @dataclass
 class PredictionParams:
     """

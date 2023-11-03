@@ -1,26 +1,26 @@
 """
-Functions for Preprocessing Training and User Input Data.
+Helper functions for loading the flight data and preparing it for training
 """
 
 from dataclasses import dataclass
 from typing import Optional
 
 from sklearn.model_selection import StratifiedShuffleSplit
-
 import pandas as pd
 from pandas import DataFrame, DatetimeIndex
 from .data_loading import DataLoader
 
+
 def compute_delay_helper(actual_date_time: DatetimeIndex, sched_date_time: DatetimeIndex) -> int:
     """
-    Computation for determining delay boolean feature
+    Loop over all flights and determine if they are delayed
     """
     return int(actual_date_time > sched_date_time)
 
+
 def get_part_of_day(date_time: DatetimeIndex) -> str:
     """
-    Computation for determing time of day based on the time 
-    provided. 
+    Divide times of day into categories
     """
     h = date_time.hour
     return (
@@ -33,31 +33,28 @@ def get_part_of_day(date_time: DatetimeIndex) -> str:
 
 def is_weekend(date_time: DatetimeIndex) -> int:
     """
-    Computation for determining whether it is the weekend 
-    based on the provided date. 
+    Determine if a time of week is on the weekend
     """
     dayofweek = date_time.dayofweek
     if dayofweek < 5:
         return 0
-    else:
-        return 1
+    return 1
 
 
 def compute_delay(data: DataFrame) -> DataFrame:
     """
-    Calculating the delay target feature and appending 
-    it to the dataframe provided. 
+    Loop over all flights and determine if they are delayed
     """
-
     data['delay'] = ''
     data_copy = data.copy()
     for index, row in data_copy.iterrows():
-        data_copy.at[index, 'delay'] = compute_delay_helper(pd.to_datetime(row['actual_date_time'],
-            format='%Y-%m-%d %H:%M:%S',
-            errors='raise'),
+        data_copy.at[index, 'delay'] = compute_delay_helper(
+            pd.to_datetime(row['actual_date_time'],
+                           format='%Y-%m-%d %H:%M:%S',
+                           errors='raise'),
             pd.to_datetime(row['sched_date_time'],
-            format='%Y-%m-%d %H:%M:%S',
-            errors='raise'))
+                           format='%Y-%m-%d %H:%M:%S',
+                           errors='raise'))
     data = data_copy
     return data
 
@@ -77,9 +74,15 @@ class DataProcessor:
 
     @classmethod
     def create_preprocessor(cls, source: str, columns: list[str]):
+        """
+        Construct a class for preprocessing the data
+        """
         return cls(source=source, columns=columns)
 
     def preprocess(self):
+        """
+        Load the data, remove the redundant fields and create/keep the salient fields
+        """
         # Load data and translate column names
         self.data = DataLoader.load(self.source, self.columns)
         self.data = self.data.build_dataframe()
@@ -94,14 +97,20 @@ class DataProcessor:
         self.data = self.add_features()
 
         # Select useful features
-        self.data = self.data[['sched_destination_city_code', 'sched_airlinecode',
-                               'flight_type', 'delay', 'part_of_day', 'is_weekend',
-                                'sched_flight_month']]
-
+        self.data = self.data[['sched_destination_city_code',
+                               'sched_airlinecode',
+                               'flight_type',
+                               'delay',
+                               'part_of_day',
+                               'is_weekend',
+                               'sched_flight_month']]
 
         return self.data
 
     def add_features(self) -> DataFrame:
+        """
+        Add salient features to DataFrame
+        """
         self.data['sched_date_time'] = pd.to_datetime(self.data['sched_date_time'],
                                                       format='%Y-%m-%d %H:%M:%S',
                                                       errors='raise')
@@ -109,11 +118,14 @@ class DataProcessor:
         self.data['is_weekend'] = self.data['sched_date_time'].apply(is_weekend)
         self.data['sched_flight_month'] = self.data['sched_date_time'].dt.month
         if 'sched_date_time' in self.data:
-            self.data = self.data.drop('sched_date_time',axis=1)
+            self.data = self.data.drop('sched_date_time', axis=1)
         return self.data
 
 
 def split_dataset(data):
+    """
+    Divide data into training and testing sets
+    """
     train_labels = data['delay'].copy()
     train_labels = train_labels.astype('int')
 
@@ -121,15 +133,3 @@ def split_dataset(data):
     #train_data = train_data.to_numpy()
 
     return train_data, train_labels
-
-# Instead of dropping features, we just select the ones we want.
-# This will avoid some errors if we try to drop something not there
-def drop_columns(df):
-    actual_drop = ["actual_date_time", "actual_flight_num", "actual_OG_city_code",
-                   "actual_destination_city_code", "actual_airline_code", "actual_flight_day",
-                   "actual_flight_month", "actual_flight_year", "dayof_week_actual_flight",
-                   ]
-    features2_drop = ["sched_OG_city_code", "dest_city", "airline", "OG_city"]
-    df = df.drop(actual_drop, axis=1)
-    df = df.drop(features2_drop, axis=1)
-    return df

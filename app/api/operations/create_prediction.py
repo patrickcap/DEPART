@@ -12,6 +12,7 @@ from app.train.data_preprocessing import DataProcessor
 
 prediction_router = APIRouter(prefix='/predict')
 
+
 # Using a POST request to submit prediction information from the user
 @prediction_router.post("", status_code=200)
 async def create_prediction(prediction_params: PredictionParams):
@@ -24,7 +25,7 @@ async def create_prediction(prediction_params: PredictionParams):
             pd.DataFrame({'sched_destination_city_code': prediction_params.destination_city_code,
             'sched_airlinecode': prediction_params.sched_airlinecode,
             'flight_type': prediction_params.flight_type,
-            'sched_date_time': prediction_params.sched_date_time}, 
+            'sched_date_time': prediction_params.sched_date_time},
             index = [0]))
 
     # Process the dataframe
@@ -32,11 +33,9 @@ async def create_prediction(prediction_params: PredictionParams):
     user_input_processor.data = user_input_processor.data[[
         'sched_destination_city_code', 'sched_airlinecode',
         'flight_type', 'part_of_day', 'is_weekend', 'sched_flight_month']]
-    print(user_input_processor.data.info())
+
     prediction_data = user_input_processor.data
 
-    #print(prediction_data.info())
     delay_prediction = CURRENT_MODEL[0].model.predict_proba(prediction_data)
 
-    return {"message":  float(delay_prediction[0][1])}\
-    
+    return {"message":  float(delay_prediction[0][1])}
