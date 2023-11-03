@@ -8,6 +8,7 @@ from fastapi import APIRouter
 
 from api.resources.model import models
 
+
 # Provides a reference to this endpoint for use by main FastAPI object
 check_model_router = APIRouter(prefix='/models')
 
