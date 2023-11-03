@@ -6,7 +6,7 @@ import uuid
 import pickle
 from fastapi import APIRouter
 
-from api.resources.model import models
+from app.api.resources.model import models
 
 
 # Provides a reference to this endpoint for use by main FastAPI object

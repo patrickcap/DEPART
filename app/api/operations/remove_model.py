@@ -8,7 +8,7 @@ import uuid
 from fastapi import APIRouter
 from fastapi.exceptions import HTTPException
 
-from api.resources.model import models
+from app.api.resources.model import models
 
 # Provides a reference to this endpoint for use by main FastAPI object
 remove_model_router = APIRouter(prefix='/models/{model_id}')

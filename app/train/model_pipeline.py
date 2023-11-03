@@ -4,11 +4,23 @@ Specify the structure of a trained XGB model
 
 from dataclasses import dataclass
 from xgboost import XGBClassifier
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+
+
+def create_transformer() -> ColumnTransformer:
+    transformer = ColumnTransformer(transformers=[
+        ('tnf2', OneHotEncoder(handle_unknown='ignore', sparse_output=False, drop='first'),
+            ['sched_destination_city_code', 'sched_airlinecode', 'flight_type'])
+            ], remainder='passthrough')
+    return transformer
+
 
 @dataclass
 class XGBModel:
     """
-    XGBClassifier model, an implementation of gradient boosted 
+    XGBClassifier model, an implementation of gradient boosted
     decision trees designed for speed and performance.
 
     Param:
@@ -17,6 +29,7 @@ class XGBModel:
     """
 
     _model: XGBClassifier
+    _pipeline: Pipeline
 
     @classmethod
     def new_model(cls: type[XGBClassifier],
@@ -37,14 +50,15 @@ class XGBModel:
                   base_score: float,
                   random_state: int,
                   missing: int,
-                  use_label_encoder: bool = False) -> XGBClassifier:
+                  use_label_encoder: bool = False) -> Pipeline:
         """
 
         Returns
         -------
         object
         """
-        instance = cls(_model=None)
+
+        instance = cls(_model=None, _pipeline=None)
 
         instance._model = XGBClassifier(max_depth=max_depth,
                                         learning_rate=learning_rate,
@@ -67,4 +81,11 @@ class XGBModel:
                                         use_label_encoder=use_label_encoder
                                         )
 
-        return instance._model
+        transformer = create_transformer()
+
+        instance._pipeline = Pipeline([
+         ('one_hot', transformer),
+         ('model', instance._model)
+        ])
+
+        return instance._pipeline
