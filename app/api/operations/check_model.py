@@ -2,11 +2,14 @@
 Provides the API endpoint that finds a model, returns its status, and exports it if desired.
 """
 
+import redis
 import uuid
 
 from fastapi import APIRouter
 
 from api.resources.model import models
+
+# rd = redis.Redis(host="localhost", port=)
 
 # Provides a reference to this endpoint for use by main FastAPI object
 check_model_router = APIRouter(prefix='/models/{model_id}')
