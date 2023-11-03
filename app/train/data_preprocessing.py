@@ -1,33 +1,41 @@
+"""
+Functions for Preprocessing Training and User Input Data.
+"""
+
 from dataclasses import dataclass
 from typing import Optional
 
-import pandas
 from sklearn.model_selection import StratifiedShuffleSplit
 
 import pandas as pd
 from pandas import DataFrame, DatetimeIndex
 from .data_loading import DataLoader
 
-# from sklearn.model_selection import StratifiedShuffleSplit
-
-
 def compute_delay_helper(actual_date_time: DatetimeIndex, sched_date_time: DatetimeIndex) -> int:
+    """
+    Computation for determining delay boolean feature
+    """
     return int(actual_date_time > sched_date_time)
 
 def get_part_of_day(date_time: DatetimeIndex) -> str:
+    """
+    Computation for determing time of day based on the time 
+    provided. 
+    """
     h = date_time.hour
     return (
-        1
-        if 5 <= h <= 11
-        else 2
-        if 12 <= h <= 17
-        else 3
-        if 18 <= h <= 22
+        1 if 5 <= h <= 11
+        else 2 if 12 <= h <= 17
+        else 3 if 18 <= h <= 22
         else 4
     )
 
 
 def is_weekend(date_time: DatetimeIndex) -> int:
+    """
+    Computation for determining whether it is the weekend 
+    based on the provided date. 
+    """
     dayofweek = date_time.dayofweek
     if dayofweek < 5:
         return 0
@@ -36,15 +44,20 @@ def is_weekend(date_time: DatetimeIndex) -> int:
 
 
 def compute_delay(data: DataFrame) -> DataFrame:
+    """
+    Calculating the delay target feature and appending 
+    it to the dataframe provided. 
+    """
+
     data['delay'] = ''
     data_copy = data.copy()
     for index, row in data_copy.iterrows():
         data_copy.at[index, 'delay'] = compute_delay_helper(pd.to_datetime(row['actual_date_time'],
-                                                                           format='%Y-%m-%d %H:%M:%S',
-                                                                           errors='raise'),
-                                                            pd.to_datetime(row['sched_date_time'],
-                                                                           format='%Y-%m-%d %H:%M:%S',
-                                                                           errors='raise'))
+            format='%Y-%m-%d %H:%M:%S',
+            errors='raise'),
+            pd.to_datetime(row['sched_date_time'],
+            format='%Y-%m-%d %H:%M:%S',
+            errors='raise'))
     data = data_copy
     return data
 
@@ -72,7 +85,7 @@ class DataProcessor:
         self.data = self.data.build_dataframe()
 
         # Handle missing values
-        self.data.dropna() 
+        self.data.dropna()
 
         # Compute delay column and leave separate
         self.data = compute_delay(self.data)
@@ -82,7 +95,8 @@ class DataProcessor:
 
         # Select useful features
         self.data = self.data[['sched_destination_city_code', 'sched_airlinecode',
-                               'flight_type', 'delay', 'part_of_day', 'is_weekend', 'sched_flight_month']]
+                               'flight_type', 'delay', 'part_of_day', 'is_weekend',
+                                'sched_flight_month']]
 
 
         return self.data
@@ -108,9 +122,8 @@ def split_dataset(data):
 
     return train_data, train_labels
 
-
-# Instead of dropping features, we will just select the ones we want. This will avoid some errors if we try to drop
-# something that is not there
+# Instead of dropping features, we just select the ones we want.
+# This will avoid some errors if we try to drop something not there
 def drop_columns(df):
     actual_drop = ["actual_date_time", "actual_flight_num", "actual_OG_city_code",
                    "actual_destination_city_code", "actual_airline_code", "actual_flight_day",

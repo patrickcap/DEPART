@@ -16,14 +16,14 @@ class ModelParams:
     """
     Defines the parameters a user must specify to create a model.
     """
-    max_depth: int = 3
-    learning_rate: float = 0.1
-    n_estimators: int = 5
+    max_depth: int = 10
+    learning_rate: float = 0.3
+    n_estimators: int = 200
     objective: str = 'binary:logistic'
     booster: str = 'gbtree'
     n_jobs: int = 2
-    gamma: float = 0.001
-    subsample: float = 0.632
+    gamma: float = 0.1
+    subsample: float = 0.63
     colsample_bytree: int = 1
     colsample_bylevel: int = 1
     colsample_bynode: int = 1
