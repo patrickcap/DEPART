@@ -5,7 +5,7 @@ from pandas import DataFrame
 from xgboost import XGBClassifier
 from .data_preprocessing import DataProcessor, split_dataset
 import pickle
-from .model import XGBModel
+from .model_pipeline import XGBModel
 
 
 def train(file_path: str, params) -> XGBClassifier:
