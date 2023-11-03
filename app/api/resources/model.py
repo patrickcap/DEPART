@@ -3,7 +3,7 @@ Specifies the information required by the user to create any model and the infor
 """
 import uuid
 from dataclasses import dataclass
-from train import XGBModel
+from app.train import XGBModel
 from .enumerations import ModelStatus
 
 # List to store Model objects

@@ -8,11 +8,11 @@ import uvicorn  # pylint: disable=import-error
 
 from fastapi import FastAPI, APIRouter  # pylint: disable=import-error
 
-from api.operations.create_prediction import prediction_router  # pylint: disable=import-error
-from api.operations.create_model import create_model_router     # pylint: disable=import-error
-from api.operations.remove_model import remove_model_router     # pylint: disable=import-error
-from api.operations.check_model import check_model_router       # pylint: disable=import-error
-from api.operations.deploy_model import deploy_model_router     # pylint: disable=import-error
+from app.api.operations.create_prediction import prediction_router  
+from app.api.operations.create_model import create_model_router    
+from app.api.operations.remove_model import remove_model_router    
+from app.api.operations.check_model import check_model_router      
+from app.api.operations.deploy_model import deploy_model_router    
 
 # Allow versioning of the API via the URI path
 BASE_PATH: Final[str] = '/v1'

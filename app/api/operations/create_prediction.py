@@ -4,11 +4,11 @@ Provides the API endpoint that makes a prediction on a target variable within a 
 
 import pandas as pd
 from fastapi import APIRouter
-from api.resources.prediction import PredictionParams
-from api.operations.deploy_model import CURRENT_MODEL
+from app.api.resources.prediction import PredictionParams
+from app.api.operations.deploy_model import CURRENT_MODEL
 
 # Provides a reference to this endpoint for use by main FastAPI object
-from train.data_preprocessing import DataProcessor
+from app.train.data_preprocessing import DataProcessor
 
 prediction_router = APIRouter(prefix='/predict')
 

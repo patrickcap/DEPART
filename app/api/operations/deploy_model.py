@@ -6,9 +6,9 @@ import uuid
 
 from fastapi import APIRouter, Depends
 from fastapi.security.api_key import APIKey
-from api.resources import Model, ModelStatus
-from api.resources.model import models
-from api.auth import get_api_key
+from app.api.resources import Model, ModelStatus
+from app.api.resources.model import models
+from app.api.auth import get_api_key
 CURRENT_MODEL = []
 # Provides a reference to this endpoint for use by main FastAPI object
 deploy_model_router = APIRouter(prefix='/deploy')
