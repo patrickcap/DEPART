@@ -32,7 +32,7 @@ class ModelParams:
     reg_lambda: int = 2
     scale_pos_weight: int = 1
     base_score: float = 0.5
-    random_state: int = 20212004
+    random_state: int = 20212005
     missing: int = 1
     use_label_encoder: bool = False
     # dataset, target (delay column), optionals with defaults:
