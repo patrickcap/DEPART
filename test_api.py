@@ -96,8 +96,45 @@ def test_get_no_export():
     assert response.status_code == 200
     assert response.json() == {"Model status": model.status.value}
 
-# Testing POST /predict
-def test_predict():
+# Testing POST /predict with trained model
+def test_predict_train():
+    test_predict_params = {
+        "destination_city_code": "KMIA",
+        "sched_airlinecode": "AAL",
+        "flight_type": "I",
+        "sched_date_time": "2017-01-01 23:30:00"
+        }
+    test_path = os.getcwd() + "/data/data.csv"
+    test_params = {
+        "max_depth": 10,
+        "learning_rate": 0.3,
+        "n_estimators": 200,
+        "objective": "binary:logistic",
+        "booster": "gbtree",
+        "n_jobs": 2,
+        "gamma": 0.1,
+        "subsample": 0.63,
+        "colsample_bytree": 1,
+        "colsample_bylevel": 1,
+        "colsample_bynode": 1,
+        "reg_alpha": 1,
+        "reg_lambda": 0,
+        "scale_pos_weight": 1,
+        "base_score": 0.5,
+        "random_state": 20212004,
+        "missing": 1,
+        "use_label_encoder": False
+        }
+    client.post("/models/train",params={"data_file":test_path},
+                json=test_params)
+    for key in models:
+       id = key
+    client.put("/deploy",params={"model_id":str(id.hex)})
+    response = client.post("/predict", json = test_predict_params)
+    assert response.status_code == 200
+
+# Testing POST /predict with upload model
+def test_predict_upload():
     test_predict_params = {
         "destination_city_code": "KMIA",
         "sched_airlinecode": "AAL",
