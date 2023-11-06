@@ -32,6 +32,7 @@ async def deploy_model(model_id: uuid.UUID, api_key: APIKey = Depends(get_api_ke
     # Check status of model
     # If status is 'completed', deploy the specified model
     if request_model.status == ModelStatus.COMPLETED:
+        CURRENT_MODEL.clear()
         CURRENT_MODEL.append(request_model)
         return {"message": "Model deployed successfully"}
     # Otherwise, return an appropriate error

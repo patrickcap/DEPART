@@ -28,6 +28,11 @@ app.include_router(remove_model_router)
 app.include_router(check_model_router)
 app.include_router(deploy_model_router)
 
+#Init page of DEPART
+@app.get("/")
+async def read_main():
+    return {"msg": "Welcome to DEPART"}
+
 # Run the API
 if __name__ == '__main__':
     port = int(os.getenv('PORT', "8080"))
