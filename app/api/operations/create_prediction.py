@@ -21,12 +21,13 @@ async def create_prediction(prediction_params: PredictionParams):
     """
 
     # Put data into dataframe for data processing
-    user_input_processor = DataProcessor(None,None,
-            pd.DataFrame({'sched_destination_city_code': prediction_params.destination_city_code,
-            'sched_airlinecode': prediction_params.sched_airlinecode,
-            'flight_type': prediction_params.flight_type,
-            'sched_date_time': prediction_params.sched_date_time},
-            index = [0]))
+    user_input_processor = DataProcessor(None, None,
+                                         pd.DataFrame(
+                                             {'sched_destination_city_code': prediction_params.destination_city_code,
+                                              'sched_airlinecode': prediction_params.sched_airlinecode,
+                                              'flight_type': prediction_params.flight_type,
+                                              'sched_date_time': prediction_params.sched_date_time},
+                                             index=[0]))
 
     # Process the dataframe
     user_input_processor.add_features()
@@ -38,4 +39,4 @@ async def create_prediction(prediction_params: PredictionParams):
 
     delay_prediction = CURRENT_MODEL[0].model.predict_proba(prediction_data)
 
-    return {"message":  float(delay_prediction[0][1])}
+    return {"message": float(delay_prediction[0][1])}

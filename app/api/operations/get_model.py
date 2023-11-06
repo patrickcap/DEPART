@@ -8,7 +8,6 @@ from fastapi import APIRouter
 
 from app.api.resources.model import models
 
-
 # Provides a reference to this endpoint for use by main FastAPI object
 check_model_router = APIRouter(prefix='/models')
 
@@ -22,13 +21,12 @@ async def check_model(model_id: uuid.UUID, export: bool = False):
     """
     # Find model in database
     try:
-            get_model = models[model_id]
-            if export is True:
-                   file_name = str(model_id)+".pkl"
-                   pickle.dump(get_model,open(file_name, 'wb') )
-                   return {"Model have saved successfully in file "+file_name}
-            else:
-                   return {"Model status": get_model.status.value}
+        get_model = models[model_id]
+        if export is True:
+            file_name = str(model_id) + ".pkl"
+            pickle.dump(get_model, open(file_name, 'wb'))
+            return {"Model have saved successfully in file " + file_name}
+        else:
+            return {"Model status": get_model.status.value}
     except:
-            return {"message": "No model found with that ID."}
-
+        return {"message": "No model found with that ID."}
