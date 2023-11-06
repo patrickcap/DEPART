@@ -14,11 +14,15 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
     ```
     git clone https://github.com/patrickcap/DEPART.git
     ```
-2. Navigate to the "scripts" directory within DEPART.
+2. Navigate to DEPART directory.
+   ```
+    cd DEPART
+    ```
+3. Navigate to the "scripts" directory within DEPART.
     ```
     cd scripts
     ```
-3. Launch the API.
+4. Launch the API.
     ```
     ./launch_api.sh
     ```
