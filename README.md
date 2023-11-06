@@ -14,7 +14,7 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
     ```
     git clone https://github.com/patrickcap/DEPART.git
     ```
-2. Navigate to the "scripts" directory.
+2. Navigate to the "scripts" directory within DEPART.
     ```
     cd scripts
     ```
@@ -22,6 +22,7 @@ DEPART is an end-to-end machine learning project with the aim of predicting the 
     ```
     ./launch_api.sh
     ```
+You can use a more user-friendly view of the API that uses Swagger by navigating to ```localhost:8080/docs``` on your browser.
 
 ## Documentation
 See [DEPART's Documentation](https://patrickcap.github.io/DEPART/index.html#) for more information about how to install and use this tool as well as the development and design processes.
@@ -33,4 +34,3 @@ See [DEPART's Documentation](https://patrickcap.github.io/DEPART/index.html#) fo
 - **docs**: User documentation, Sphinx files.
 - **research**: Load and inspect data prior to development in a jupyter notebook.
 - **scripts**: Automated Bash scripts.
-- **venv**: Virtual environment libraries and scripts.
