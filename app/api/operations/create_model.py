@@ -48,8 +48,7 @@ async def upload_model(model_file: str):
 
     try:
         with open(model_file, "rb") as input_file:
-            loaded_file = pickle.load(input_file)
-        model.model = loaded_file
+            model = pickle.load(input_file)
         model.status = ModelStatus.COMPLETED
         models[model_id] = model
     except:
