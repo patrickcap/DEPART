@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started (User) &mdash; Python  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started (Developer)" href="getting-started-dev.html" />
+    <link rel="prev" title="Welcome to DEPART’s Documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started (User)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#workflows">Workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-a-create-deploy-and-use-a-model-for-prediction">Workflow A: Create, Deploy, and Use a Model for Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-b-delete-a-model">Workflow B: Delete a Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started-dev.html">Getting Started (Developer)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started (User)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getting-started-user.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started-user">
+<h1>Getting Started (User)<a class="headerlink" href="#getting-started-user" title="Link to this heading"></a></h1>
+<p>This page provides instructions for using an already-running instance of DEPART.</p>
+<section id="workflows">
+<h2>Workflows<a class="headerlink" href="#workflows" title="Link to this heading"></a></h2>
+<p>This section will provide an overview of the common workflows that are possible using DEPART.</p>
+<section id="workflow-a-create-deploy-and-use-a-model-for-prediction">
+<h3>Workflow A: Create, Deploy, and Use a Model for Prediction<a class="headerlink" href="#workflow-a-create-deploy-and-use-a-model-for-prediction" title="Link to this heading"></a></h3>
+<p>Step A.1: Create a Model</p>
+<ul class="simple">
+<li><p>Utilising the Swagger user interface for FastAPI, execute the <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/models</span></code> endpoint with a path to the required dataset and any optional parameters for the model.</p></li>
+<li><p>After executing this request, the user will receive a unique identifier for the trained model, remember this identifier to be able to refer to this model in other API requests.</p></li>
+</ul>
+<p>Step A.2: Check the Model [Optional]</p>
+<ul class="simple">
+<li><p>Once a model is created, check the performance and status of it by executing the <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/models</span></code> endpoint with its unique identifier.</p></li>
+<li><p>If the model is not satisfactor, change the model parameters/data and repeat Step A.1 until it is satisfactory.</p></li>
+</ul>
+<p>Step A.3: Export the Model [Optional]</p>
+<ul class="simple">
+<li><p>If the performance of the model is satisfactory, save it locally by executing the <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/models</span></code> endpoint again but now setting the optional <code class="docutils literal notranslate"><span class="pre">export</span></code> field to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+<p>Step A.4: Deploy the Model</p>
+<ul class="simple">
+<li><p>Once a model has been selected, deploy it by executing the <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/deploy</span></code> endpoint with the unique identifier of the model, the API key specified, and an optional path to locally stored models.</p></li>
+<li><p>Note that if a path to a local store of models is provided, DEPART will search in that location as well as within the current API session for the specified model. If no path is provided, DEPART will only search the current session for the specified model.</p></li>
+<li><p>If a model cannot be found or does not have a status of <code class="docutils literal notranslate"><span class="pre">completed</span></code>, the deployment will fail.</p></li>
+</ul>
+<p>Step A.5: Predict with the Model</p>
+<ul class="simple">
+<li><p>Once a model has been successfully deployed, execute the <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/predict</span></code> endpoint with the prediction data.</p></li>
+<li><p>The result will be a probability of the flight (described by the prediction data) being delayed.</p></li>
+</ul>
+</section>
+<section id="workflow-b-delete-a-model">
+<h3>Workflow B: Delete a Model<a class="headerlink" href="#workflow-b-delete-a-model" title="Link to this heading"></a></h3>
+<p>Step B.1: Delete a Model</p>
+<ul class="simple">
+<li><p>If a model is present within the current API session, it can be deleted by exeucting the <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/models</span></code> endpoint with the unique identifier for that model.</p></li>
+<li><p>If the model cannot be found, its removal will fail.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to DEPART’s Documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting-started-dev.html" class="btn btn-neutral float-right" title="Getting Started (Developer)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
