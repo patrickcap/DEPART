@@ -4,6 +4,7 @@ Provides the API endpoint that makes a prediction on a target variable within a 
 
 import pandas as pd
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from app.api.resources.prediction import PredictionParams
 from app.api.operations.deploy_model import CURRENT_MODEL
 
@@ -15,7 +16,7 @@ prediction_router = APIRouter(prefix='/predict')
 
 # Using a POST request to submit prediction information from the user
 @prediction_router.post("", status_code=200)
-async def create_prediction(prediction_params: PredictionParams):
+async def create_prediction(prediction_params: PredictionParams) -> JSONResponse:
     """
     Use the user-specified parameters to make a prediction on a model. Return the prediction result.
     """
@@ -36,7 +37,7 @@ async def create_prediction(prediction_params: PredictionParams):
         'flight_type', 'part_of_day', 'is_weekend', 'sched_flight_month']]
 
     prediction_data = user_input_processor.data
-
     delay_prediction = CURRENT_MODEL[0].model.predict_proba(prediction_data)
+    contect = {"message": float(delay_prediction[0][1])}
 
-    return {"message": float(delay_prediction[0][1])}
+    return JSONResponse(contect=contect, status_code=200)
